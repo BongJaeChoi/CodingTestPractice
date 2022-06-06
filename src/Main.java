@@ -5,23 +5,14 @@ public class Main {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        System.out.println(T.solution(input) ? "YES" : "NO");
+        System.out.println(T.solution(input));
     }
 
-    public boolean solution(String str) {
-        String temp = "";
+    public int solution(String str) {
+        String answer = "";
 
-        for (int i = 0; i < str.toCharArray().length; i++) {
-            char c = str.charAt(i);
+        answer = str.replaceAll("[a-z]|[A-Z]", "");
 
-            if (Character.isAlphabetic(c)) {
-                temp += c;
-            }
-        }
-
-        //뒤집어도 원본이랑 똑같냐
-        String reverse = new StringBuilder(temp).reverse().toString();
-
-        return temp.equalsIgnoreCase(reverse.toString());
+        return Integer.parseInt(answer);
     }
 }
