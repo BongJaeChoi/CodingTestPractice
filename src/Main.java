@@ -4,24 +4,21 @@ public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        System.out.print(T.solution(str));
+        int input1 = scanner.nextInt();
+
+        String[] inputs = new String[input1];
+        for (int i = 0; i < input1; i++) {
+            inputs[i] = scanner.next();
+        }
+        for (String input : inputs) {
+            System.out.println(T.solution(input));
+        }
     }
 
     public String solution(String str) {
-        String answer = "";
-        String[] arr = str.split(" ");
-
-        int m = Integer.MIN_VALUE;
-
-        for (String s : arr) {
-            int length = s.length();
-            if (length > m) {
-                m = length;
-                answer = s;
-            }
-        }
-
-        return answer;
+        StringBuilder answer = new StringBuilder();
+        answer.append(str);
+        answer.reverse();
+        return answer.toString();
     }
 }
