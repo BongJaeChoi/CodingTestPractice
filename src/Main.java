@@ -4,29 +4,31 @@ public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        int count = scanner.nextInt();
-        String input2 = scanner.next();
-        System.out.print(T.solution(count, input2));
+        int n = Integer.parseInt(scanner.nextLine());
+        String line = scanner.nextLine();
+        System.out.println(T.solution(n, line));
     }
 
-    public String solution(int count, String str) {
+    public String solution(int n, String str) {
         String answer = "";
-        StringBuilder temp = new StringBuilder();
-        int c = 0;
-        for (int i = 0; i < str.length(); i++) {
-            temp.append(String.valueOf(str.charAt(i))
-                    .replace('#', '1')
-                    .replace('*', '0')
-            );
+        int value = -1;
 
-            c++;
+        String[] s = str.split(" ");
+        for (int i = 0; i < s.length; i++) {
+            String element = s[i];
+            int x = Integer.parseInt(String.valueOf(element));
 
-            if (c == 7) {
-                int codePoint = Integer.parseInt(temp.toString(), 2);
-                String 해독한문자 = Character.toString((char) codePoint);
-                answer += 해독한문자;
-                temp = new StringBuilder();
-                c = 0;
+            if (x == n) {
+                value = Integer.parseInt(String.valueOf(s[i - 1]));
+            }
+        }
+
+        answer += str.charAt(0);
+
+        for (int i = 1; i < s.length; i++) {
+            String temp = s[i];
+            if (value < Integer.parseInt(temp)) {
+                answer += " " + temp;
             }
         }
 
