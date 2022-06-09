@@ -14,11 +14,10 @@ public class Main {
         StringBuilder temp = new StringBuilder();
         int c = 0;
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '#') {
-                temp.append(1);
-            } else {
-                temp.append(0);
-            }
+            temp.append(String.valueOf(str.charAt(i))
+                    .replace('#', '1')
+                    .replace('*', '0')
+            );
 
             c++;
 
