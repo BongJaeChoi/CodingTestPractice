@@ -4,34 +4,28 @@ public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine());
-        String line = scanner.nextLine();
-        System.out.println(T.solution(n, line));
+        int n = scanner.nextInt();
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        System.out.println(T.solution(arr));
     }
 
-    public String solution(int n, String str) {
-        String answer = "";
-        int value = -1;
+    public int solution(int[] arr) {
+        int count = 0;
+        int t = 0;
 
-        String[] s = str.split(" ");
-        for (int i = 0; i < s.length; i++) {
-            String element = s[i];
-            int x = Integer.parseInt(String.valueOf(element));
-
-            if (x == n) {
-                value = Integer.parseInt(String.valueOf(s[i - 1]));
+        for (int element : arr) {
+            if (element > t) {
+                count++;
+                t = element;
             }
         }
 
-        answer += str.charAt(0);
 
-        for (int i = 1; i < s.length; i++) {
-            String temp = s[i];
-            if (value < Integer.parseInt(temp)) {
-                answer += " " + temp;
-            }
-        }
-
-        return answer;
+        return count;
     }
 }
