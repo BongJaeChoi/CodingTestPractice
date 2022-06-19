@@ -6,24 +6,29 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int length = Integer.parseInt(scanner.nextLine());
         String arr = scanner.nextLine();
-        System.out.println(T.solution(length, arr));
+        for (int x : T.solution(length, arr)) {
+            System.out.print(x + " ");
+        }
     }
 
-    public int solution(int length, String target) {
-        int answer = 0;
+    public int[] solution(int length, String target) {
+        int[] answer = new int[length];
 
         String[] arr = target.split(" ");
 
-        int temp = 0;
+        int temp = 1;
         for (int i = 0; i < length; i++) {
-            int b = Integer.parseInt(arr[i]);
+            int a = Integer.parseInt(arr[i]);
+            for (int j = 0; j < length; j++) {
+                int b = Integer.parseInt(arr[j]);
 
-            if (b != 0) {
-                temp++;
-            } else {
-                temp = 0;
+                if (a < b) {
+                    temp++;
+                }
             }
-            answer += temp;
+            answer[i] = temp;
+            temp = 1;
+
         }
 
         return answer;
