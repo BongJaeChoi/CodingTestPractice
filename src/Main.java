@@ -4,48 +4,28 @@ public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        int x = Integer.parseInt(scanner.nextLine());
-        String numArr = scanner.nextLine();
-        for (int s : T.solution(numArr, x)) {
-            if (s == 0 || s == 1) {
-                continue;
-            }
-
-            System.out.print(s + " ");
-        }
+        int length = Integer.parseInt(scanner.nextLine());
+        String arr = scanner.nextLine();
+        System.out.println(T.solution(length, arr));
     }
 
-    public int[] solution(String arr, int x) {
+    public int solution(int length, String target) {
+        int answer = 0;
 
-        String[] strings = arr.split(" ");
-        int[] numArr = new int[x];
+        String[] arr = target.split(" ");
 
-        //자연수 뒤집기
-        for (int i = 0; i < numArr.length; i++) {
-            //첫자리부터 연속된 0은 무시
-            StringBuilder sb = new StringBuilder(strings[i].replaceAll("^00+", ""));
+        int temp = 0;
+        for (int i = 0; i < length; i++) {
+            int b = Integer.parseInt(arr[i]);
 
-            String s1 = sb.reverse().toString();
-            int i1 = Integer.parseInt(s1);
-            numArr[i] = i1;
-        }
-
-        //뒤집은 수 중에 소수만 남기기
-        int n = 2;
-        for (int i = 0; i < numArr.length; i++) {
-            for (int j = n; j < 100000; j++) {
-                int element = numArr[i];
-
-                if (element / j == 1) {
-                    break;
-                }
-
-                if (element % j == 0) {
-                    numArr[i] = 0;
-                    break;
-                }
+            if (b != 0) {
+                temp++;
+            } else {
+                temp = 0;
             }
+            answer += temp;
         }
-        return numArr;
+
+        return answer;
     }
 }
