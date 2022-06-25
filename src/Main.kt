@@ -1,37 +1,29 @@
-fun solution(n: Int): Int {
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.temporal.ChronoUnit
 
-    val x = Integer.toBinaryString(n)
-    val arr = x.split("1")
+fun solution(E: String, L: String): Int {
+    val startTime = LocalTime.of(E.split(":")[0].toInt(), E.split(":")[1].toInt())
+    val endTime = LocalTime.of(L.split(":")[0].toInt(), L.split(":")[1].toInt())
 
+    val between = ChronoUnit.MINUTES.between(startTime, endTime)
 
-    var result = 0
-
-    println(x)
-    println(arr)
-
-    if (arr.size == 2) {
-        return 0
+    var timeCost = if (between % 60 != 0L) {
+        between + 60
+    } else {
+        between
     }
 
-    for (i in 1 until arr.size) {
+    timeCost /= 60
 
-        if (arr[i].isEmpty()) {
-            continue
-        }
-        result = Math.max(result, arr[i].length)
-    }
-
-
-
-    return result
+    return (2 + 3 + ((timeCost - 1) * 4)).toInt()
 }
 
 
 fun main(args: Array<String>) {
 
-    println(solution(51712))
+    println(solution("10:00", "13:21"))
 //    println(solution(32))
-
 
 }
 
