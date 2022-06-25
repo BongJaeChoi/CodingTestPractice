@@ -1,175 +1,22 @@
 fun main(args: Array<String>) {
-
-    println(
-        solution(
-            intArrayOf(
-                9,
-                3,
-                9,
-                3,
-                9,
-                7,
-                9,
-                9,
-                3,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                9,
-                3,
-                9,
-                7,
-                1,
-                9,
-                3,
-                9,
-                7,
-                9
-            )
-        )
-    )
-//    println(solution(32))
-
+    println(solution(10, 1005, 30))
 }
 
-fun solution(A: IntArray): Int {
-    val hashMap = HashMap<Int, Int>()
+fun solution(X: Int, Y: Int, D: Int): Int {
+    /**
+     * 작은 개구리는 길 반대편으로 가고 싶어합니다.
+     * 개구리는 현재 위치 X에 있고 Y보다 크거나 같은 위치에 도달하려고 합니다.
+     * 작은 개구리는 항상 고정된 거리 D를 점프합니다.
+     * 최소 회수를 구하시오
+     */
 
-    for (i in A) {
-        hashMap[i] = hashMap.getOrDefault(i, 0) + 1
+    if (X == Y) {
+        return 0
     }
 
-    for (key in hashMap.keys) {
-        val occurrences: Int? = hashMap[key]
-        if (occurrences!! % 2 != 0) return key
-    }
+    val distance = (Y - X)
+    return Math.ceil(distance.toDouble() / D.toDouble()).toInt()
 
-    throw RuntimeException("리턴할 수 없는 경우도 들어오기 때문에 에러를 던져주자");
 }
 
 fun solution() {
