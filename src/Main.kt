@@ -1,60 +1,177 @@
-import java.text.SimpleDateFormat
-import java.time.LocalTime
-import java.time.temporal.ChronoUnit
-import java.util.*
-
-fun solution(A: IntArray, K: Int): IntArray {
-
-    val result = A.toList()
-
-
-    Collections.rotate(result, K)
-
-
-    val list = arrayListOf<Int>()
-
-
-
-
-    for (i in K - 1 until A.size) {
-        list.add(A[i])
-    }
-    for (i in 0 until (A.size - K)) {
-        list.add(list.size, A[i])
-    }
-    println(list)
-
-    return result.toIntArray()
-}
-
-
 fun main(args: Array<String>) {
 
-    println(solution(intArrayOf(3, 8, 9, 7, 6), 3).contentToString())
+    println(
+        solution(
+            intArrayOf(
+                9,
+                3,
+                9,
+                3,
+                9,
+                7,
+                9,
+                9,
+                3,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                9,
+                3,
+                9,
+                7,
+                1,
+                9,
+                3,
+                9,
+                7,
+                9
+            )
+        )
+    )
 //    println(solution(32))
 
 }
 
 fun solution(A: IntArray): Int {
-    // write your code in Kotlin 1.3.11 (Linux)
+    val hashMap = HashMap<Int, Int>()
 
-    val arr = A.asSequence()
-        .distinct()
-        .sorted()
-        .filter { it > 0 }
-        .toList()
-
-    if (arr.isEmpty()) {
-        return 1
+    for (i in A) {
+        hashMap[i] = hashMap.getOrDefault(i, 0) + 1
     }
 
-
-    for (i in arr.indices) {
-        println("${(i + 1)} / ${arr[i]}")
-        if ((i + 1) != arr[i]) {
-            return (i + 1)
-        }
+    for (key in hashMap.keys) {
+        val occurrences: Int? = hashMap[key]
+        if (occurrences!! % 2 != 0) return key
     }
 
-    return arr[arr.size - 1] + 1
+    throw RuntimeException("리턴할 수 없는 경우도 들어오기 때문에 에러를 던져주자");
+}
+
+fun solution() {
+
 }
