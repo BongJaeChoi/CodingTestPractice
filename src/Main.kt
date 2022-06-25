@@ -1,28 +1,23 @@
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
+import java.util.*
 
-fun solution(E: String, L: String): Int {
-    val startTime = LocalTime.of(E.split(":")[0].toInt(), E.split(":")[1].toInt())
-    val endTime = LocalTime.of(L.split(":")[0].toInt(), L.split(":")[1].toInt())
+fun solution(A: IntArray, K: Int): IntArray {
+    val result = A.toList()
 
-    val between = ChronoUnit.MINUTES.between(startTime, endTime)
 
-    var timeCost = if (between % 60 != 0L) {
-        between + 60
-    } else {
-        between
-    }
+    Collections.rotate(result, K)
 
-    timeCost /= 60
 
-    return (2 + 3 + ((timeCost - 1) * 4)).toInt()
+
+    return result.toIntArray()
 }
 
 
 fun main(args: Array<String>) {
 
-    println(solution("10:00", "13:21"))
+    println(solution(intArrayOf(3, 8, 9, 7, 6), 3).contentToString())
 //    println(solution(32))
 
 }
