@@ -4,12 +4,25 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 fun solution(A: IntArray, K: Int): IntArray {
+
     val result = A.toList()
 
 
     Collections.rotate(result, K)
 
 
+    val list = arrayListOf<Int>()
+
+
+
+
+    for (i in K - 1 until A.size) {
+        list.add(A[i])
+    }
+    for (i in 0 until (A.size - K)) {
+        list.add(list.size, A[i])
+    }
+    println(list)
 
     return result.toIntArray()
 }
