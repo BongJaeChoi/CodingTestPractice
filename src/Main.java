@@ -1,36 +1,24 @@
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        int length = Integer.parseInt(scanner.nextLine());
-        String arr = scanner.nextLine();
-        for (int x : T.solution(length, arr)) {
-            System.out.print(x + " ");
-        }
+        System.out.println(T.solution(new String[]{"leo", "kiki", "eden"}, new String[]{"kiki", "eden"}));
     }
 
-    public int[] solution(int length, String target) {
-        int[] answer = new int[length];
+    public String solution(String[] participant, String[] completion) {
 
-        String[] arr = target.split(" ");
+        HashSet<String> set = new HashSet<>(Arrays.asList(completion));
 
-        int temp = 1;
-        for (int i = 0; i < length; i++) {
-            int a = Integer.parseInt(arr[i]);
-            for (int j = 0; j < length; j++) {
-                int b = Integer.parseInt(arr[j]);
-
-                if (a < b) {
-                    temp++;
-                }
+        for (String s : participant) {
+            if (!set.contains(s)) {
+                return s;
             }
-            answer[i] = temp;
-            temp = 1;
-
         }
 
-        return answer;
+        return "";
     }
 }
