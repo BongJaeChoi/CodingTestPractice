@@ -1,7 +1,6 @@
 fun main(args: Array<String>) {
 //    println(solution(5, intArrayOf(10, 6, 8, 4, 7, 5, 4, 4, 5, 3, 2, 1)))
 //    println(solution(arrayOf("muzi","forodo","apeach","neo"), arrayOf("frodo neo","muzi forodo"),2))
-    println(solution("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"))
 }
 
 fun solution() {
