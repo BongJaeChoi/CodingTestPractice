@@ -13,29 +13,34 @@ public class Main {
         }
         System.out.println(T.solution(n, arr));
     }
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
 
     private int solution(int n, int[][] arr) {
-        int answer = Integer.MIN_VALUE; //최대값 찾아야해서 작은값으로 초기화
-        int sum1,sum2;
+        int answer = 0; //최대값 찾아야해서 작은값으로 초기화
 
+        //3중포문 돌면서 비교 좌표값이니까 (i+dx,j+dy)
+        //if 4개쓰지말고 걍 포문 돌림
         for (int i = 0; i < n; i++) {
-            sum2 = sum1 = 0; // 0행 0열부터
             for (int j = 0; j < n; j++) {
-                sum1+=arr[i][j]; // 행 고정, 열변화
-                sum2+=arr[j][i]; // 열 고정, 행변화
+                //상하좌우 값이랑 비교 상 ([i-1][j]) ([i][j+1]) ([i+1][j]) ([i][j-1])
+                int base = arr[i][j];
+                boolean flag = true;
+                for (int k = 0; k < 4; k++) {
+                    int nx = i + dx[k];
+                    int ny = j + dy[k];
+
+                    // 4방향의 값 nx,ny 의 값이 나 자신 arr[i][j] 보다 크거나 같으면 break;
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] >= arr[i][j]) {
+                        flag = false;
+                        break;
+                    }
+
+                }
+                //주변에 큰값이 없으면 봉우리 개수 증가
+                if (flag) answer++;
             }
-            answer = Math.max(answer, sum1);//최대값 찾기위해 행 값들 검사
-            answer = Math.max(answer, sum2);//최대값 찾기위해 열 값들 검사
         }
-
-        sum1=sum2=0;
-
-        for (int i = 0; i < n; i++) {
-            sum1+=arr[i][i] ;// (0,0), (1,1), (2,2) , (3,3)...(n-1,n-1)
-            sum2+=arr[n-1][n-i-1];// (0,5), (1,4), (2,3) , (3,2)...(n-1,n-1)
-        }
-        answer = Math.max(answer, sum1);//최대값 찾기위해 행 값들 검사
-        answer = Math.max(answer, sum2);//최대값 찾기위해 열 값들 검사
 
         return answer;
     }
