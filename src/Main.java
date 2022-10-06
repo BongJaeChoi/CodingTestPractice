@@ -1,70 +1,60 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        int[][] arr = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        int[][] arr = new int[n+1][6];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= 5; j++) {
                 arr[i][j] = scanner.nextInt();
             }
         }
         System.out.println(T.solution(n, arr));
     }
-    int[] dx = {-1, 0, 1, 0};
-    int[] dy = {0, 1, 0, -1};
 
     private int solution(int n, int[][] arr) {
         int answer = 0; //최대값 찾아야해서 작은값으로 초기화
+        int min = Integer.MIN_VALUE;
 
-        //3중포문 돌면서 비교 좌표값이니까 (i+dx,j+dy)
-        //if 4개쓰지말고 걍 포문 돌림
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                //상하좌우 값이랑 비교 상 ([i-1][j]) ([i][j+1]) ([i+1][j]) ([i][j-1])
-                int base = arr[i][j];
-                boolean flag = true;
-                for (int k = 0; k < 4; k++) {
-                    int nx = i + dx[k];
-                    int ny = j + dy[k];
+        //1번학생의 카운트 변수 만들기
+        //(모두 검사)
+        //1번학생이  1학년일때 같은반 있는사람이 있으면 +
+        //1번학생이  2학년일때 같은반 있는사람이 있으면 +
+        //1번학생이  3학년일때 같은반 있는사람이 있으면 +
+        //1번학생이  4학년일때 같은반 있는사람이 있으면 +
+        //1번학생이  5학년일때 같은반 있는사람이 있으면 +
 
-                    // 4방향의 값 nx,ny 의 값이 나 자신 arr[i][j] 보다 크거나 같으면 break;
-                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] >= arr[i][j]) {
-                        flag = false;
-                        break;
+        //n번학생이 1,2,3,4,5 같은 반있는지 검사
+
+
+        //카운트를 담을 수 있는 리스트선언
+
+        //i[0]
+        //i(행) 이 증가할때마다
+
+
+        for (int i = 1; i <= n; i++) {
+            int cnt = 0;
+            //i번 학생 카운트
+            for (int j = 1; j <= n; j++) {
+                //1학년 부터 5학년까지라서 5까지
+                for (int k = 1; k <= 5; k++) {
+                    if (arr[i][k] == arr[j][k]) { // i반 학생의 반(k)과 j학생의 반(k)
+                        cnt++;
+                        break;//???????? 중복카운팅하면 안되서 그럼 한 학생당 학년별 하나의 카운팅 이거 막혔는데 이해잘안됨..
+                        //막 숫자 11나오고 그럼. 6나오고... 5까지인데.. 이거땜에
                     }
-
                 }
-                //주변에 큰값이 없으면 봉우리 개수 증가
-                if (flag) answer++;
+            }
+            if(cnt>min){ // 같지않고 작을때만 하니까 가장 앞에 학생인게 검증됨
+                min = cnt;
+                answer = i;
             }
         }
 
-        return answer;
-    }
 
-    public String solution(String s) {
-        String answer = "";
-
-        Stack<Character> stack = new Stack<>();
-
-
-        //소문자 사이 문자제거
-
-        //뒷 문자열이 괄호가 아니면 answer 에 추가
-
-        char[] chars = s.toCharArray();
-
-        for (char aChar : chars) {
-            if (aChar == ')') {
-                while (stack.pop() != '(') ;
-            } else {
-                stack.push(aChar);
-            }
-        }
-        System.out.println(stack.toString());
         return answer;
     }
 }
