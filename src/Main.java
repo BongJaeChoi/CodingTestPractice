@@ -16,20 +16,32 @@ public class Main {
             arr2[j] = scanner.nextInt();
         }
 
-        for (int i1 : T.solution(arr1, arr2)) {
+        for (int i1 : T.solution(i, k, arr1, arr2)) {
             System.out.print(i1 + " ");
         }
 
     }
 
-    private int[] solution(int[] arr1, int[] arr2) {
-        int[] result = new int[arr1.length + arr2.length];
+    private ArrayList<Integer> solution(int n, int m, int[] a, int[] b) {
+        ArrayList<Integer> result = new ArrayList<>();
 
-        System.arraycopy(arr1, 0, result, 0, arr1.length);
+        int p1 = 0, p2 = 0; // two pointers 알고리즘
 
-        System.arraycopy(arr2, 0, result, arr1.length, arr2.length);
+        while (p1 < n && p2 < m) {
+            if(a[p1] < b[p2]){
+                result.add(a[p1++]);
+            }else {
+                result.add(b[p2++]);
+            }
+        }
 
-        Arrays.sort(result);
+        while (p1<n){ // a 배열 나머지가 있는경우
+            result.add(a[p1++]);
+        }
+        while (p2<m){ // b 배열 나머지가 있는경우
+            result.add(b[p2++]);
+        }
+
         return result;
     }
 }
