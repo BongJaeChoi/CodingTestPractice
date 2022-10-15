@@ -43,7 +43,7 @@ public class Main {
 
         int p1 = 0, p2 = 0; // two pointers 알고리즘
 
-        while (p1 < n && p2 < m){
+        while (p1 < n && p2 < m) {
             if (a[p1] < b[p2]) {
                 result.add(a[p1++]);
             } else {
