@@ -4,30 +4,29 @@ public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        int[] arr1 = new int[]{3, 24, 50, 79, 88, 150, 345};
-        System.out.println(Arrays.toString(T.twoSumSorted(arr1, 200)));
+//        int[] arr1 = new int[]{3, 24, 50, 79, 88, 150, 345};
+        int[] arr1 = new int[]{-1, -2, -3, -4, -5};
+        System.out.println(Arrays.toString(T.twoSum(arr1, -8)));
 
     }
 
-    public int[] twoSumSorted(int[] numbers, int target) {
-        int[] result = new int[2];
+    public int[] twoSum(int[] nums, int target) {
 
-        int p1 = 0;
-        int p2 = numbers.length - 1;
-        while (p1 < p2) {
-            if (target == numbers[p1] + numbers[p2]) {
-                result[0] = p1;
-                result[1] = p2;
-                return solution(result);
-            } else if (target < numbers[p1] + numbers[p2]) {
-                // target 보다 큰값이 나오면 1번째 포인터를 이동시켜서 값을 줄인다.
-                p2--;
-            } else {
-                // target 보다 작은값이 나오면 2번째 포인터를 이동시켜서 값을 늘린다.
-                p1++;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            Integer k = map.get(target - num);
+            if (k != null && k != i) {
+                return new int[]{i, k};
             }
         }
-        return result;
+        throw new IllegalArgumentException("No two sum solution");
     }
 
     public int[] solution(int[] arr) {
