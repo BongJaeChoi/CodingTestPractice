@@ -42,6 +42,11 @@ public class Main {
 
         int p1 = 0, p2 = 0; // two pointers 알고리즘
 
+        //a[p1] < b[p2]
+        //answer.add(a[p1]); p1++
+        //else answer.add(b[p2]); p2++
+        //pointer 는 length 까지만 증가
+
         while (p1 < n && p2 < m) {
             if (a[p1] < b[p2]) {
                 result.add(a[p1++]);
