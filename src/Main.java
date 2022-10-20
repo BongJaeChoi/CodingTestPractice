@@ -4,46 +4,34 @@ public class Main {
     public static void main(String[] args) {
         Main T = new Main();
         Scanner scanner = new Scanner(System.in);
-        int i = scanner.nextInt();
-        int[] arr1 = new int[i];
-
-        for (int j = 0; j < arr1.length; j++) {
-            arr1[j] = scanner.nextInt();
-        }
+        int n = scanner.nextInt();
         int k = scanner.nextInt();
-        int[] arr2 = new int[k];
+
+
+        int[] arr2 = new int[n];
         for (int j = 0; j < arr2.length; j++) {
             arr2[j] = scanner.nextInt();
         }
 
-        Arrays.sort(arr1);
-        Arrays.sort(arr2);
-
-        for (Integer integer : T.solution(i, k, arr1, arr2)) {
-            System.out.print(integer + " ");
-        }
+        System.out.println(T.solution(arr2, n, k));
 
     }
 
-    /**
-     * 교집합 구하기
-     */
-    private ArrayList<Integer> solution(int n, int m, int[] a, int[] b) {
-        ArrayList<Integer> result = new ArrayList<>();
 
-        int p1 = 0, p2 = 0;
+    private int solution(int[] arr, int n, int k) {
+        int answer = 0, sum = 0;
 
-        while (p1 < n && p2 < m)
-            if (a[p1] < b[p2]) {//sortedArr1[p1] 은 이제 공통원소가 아니기때문에
-                p1++;
-            } else if (a[p1] == b[p2]) {
-                result.add(a[p1]);
-                p1++;
-                p2++;
-            } else {
-                p2++;
-            }
+        for (int i = 0; i < k; i++) {
+            sum += arr[i];
+            answer = sum;
+        }
 
-        return result;
+        for (int i = k; i < n; i++) {
+            //윈도우 하나를 만들어서 맨 끝 값 값을 더하고 시작 값을 뺀다
+            sum += (arr[i] - arr[i - k]); //a[i] = 윈도우의 마지막 값, a[i-k] = 윈도우의 첫번째값
+            answer = Math.max(answer, sum);
+        }
+
+        return answer;
     }
 }
