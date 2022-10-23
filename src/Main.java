@@ -27,8 +27,10 @@ public class Main {
         }
 
         for (int i = k; i < n; i++) {
+            //k = 윈도우 크기 . 여기서는 3 (연속된3일)
             //윈도우 하나를 만들어서 맨 끝 값 값을 더하고 시작 값을 뺀다
-            sum += (arr[i] - arr[i - k]); //a[i] = 윈도우의 마지막 값, a[i-k] = 윈도우의 첫번째값
+            sum = sum + arr[i];
+            sum = sum - arr[i - k]; //a[i] = 윈도우의 마지막 값, a[i-k] = 윈도우의 첫번째값
             answer = Math.max(answer, sum);
         }
 
