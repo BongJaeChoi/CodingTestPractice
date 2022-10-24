@@ -1,36 +1,26 @@
 fun main() {
 //    print(runningSum(intArrayOf(1, 1, 1, 1, 1)))
-    print(pivotIndex(intArrayOf(2, 1, -1)))
+    print(findErrorNums(intArrayOf(1, 2, 2, 4)).contentToString())
 }
 
-fun runningSum(nums: IntArray): IntArray {
-    val result = arrayListOf<Int>()
-    var temp = 0
-    for (num in nums) {
-        temp += num;
-        result.add(temp)
+fun findErrorNums(nums: IntArray): IntArray {
+    val hashMap = HashMap<Int, Int>()
+    var miss = -1
+    var duplicate = -1
+    nums.forEach { i ->
+        hashMap[i] = hashMap.getOrDefault(i, 0) + 1
     }
-    return result.toIntArray();
-}
+    println(hashMap)
+    for (i in 1..nums.size) {
+        if (hashMap.containsKey(i)) {
+            if (hashMap[i] == 2) {
+                duplicate = i
+            }
+        } else {
+            miss = i // 1부터 들어있으므로 해시맵에 들어있지 않은 값이 없는값
 
-fun pivotIndex(nums: IntArray): Int {
-    var p1 = 0
-    var p2 = nums.size - 1
-    var index = -1
-
-    var leftSum = 0
-    var rightSum = 0
-
-    while (leftSum == rightSum) {
-
-        leftSum += nums[p1]
-        rightSum += nums[p2]
-        p1++
-        p2--
-        println("left :${leftSum} / right :${rightSum}")
-
-
-        index++
+        }
     }
-    return index;
+
+    return intArrayOf(duplicate, miss)
 }
