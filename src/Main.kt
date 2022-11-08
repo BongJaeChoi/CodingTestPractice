@@ -1,8 +1,4 @@
 fun main() {
-//    print(runningSum(intArrayOf(1, 1, 1, 1, 1)))
-//    print(findErrorNums(intArrayOf(1, 2, 2, 4)).contentToString())
-//    print(solution(arrayOf("ayaye", "uuu", "yeye", "yemawoo", "ayaayaa")))
-    print(pivotIndex(intArrayOf(1, 7, 3, 6, 5, 6)))
 }
 
 fun findErrorNums(nums: IntArray): IntArray {
@@ -25,6 +21,44 @@ fun findErrorNums(nums: IntArray): IntArray {
     }
 
     return intArrayOf(duplicate, miss)
+}
+
+fun solution(n: Int): Int {
+    val answer = IntArray(n)
+    answer[0] = 1
+    answer[1] = 1
+
+    for (i in 2 until n) {
+        answer[i] = answer[i - 2] + answer[i - 1]
+    }
+    return answer.last()
+}
+
+
+private fun fibonacciArr(n: Int): Int {
+    Array(n) { 0 }.also {
+        it[0] = 1
+        it[1] = 1
+        for (i in 2 until it.size) {
+            it[i] = it[i - 1] + it[i - 2]
+        }
+        return it.last()
+    }
+}
+
+fun solution(denum1: Int, num1: Int, denum2: Int, num2: Int): IntArray {
+    val top = denum1 * num2 + denum2 * num1
+    val bottom = num1 * num2
+
+    var max = 1
+
+    for (i in 1..top) {
+        if (top % i == 0 && bottom % i == 0) {
+            max = i
+        }
+    }
+
+    return intArrayOf(top / max, bottom / max)
 }
 
 fun pivotIndex(nums: IntArray): Int {
