@@ -1,25 +1,15 @@
+import java.util.*
+
 fun main() {
-    println(solution(intArrayOf(1, 2, 2, 5, 5, 5, 4)))
+    println(solution(166).contentToString())
 }
 
-fun solution(array: IntArray): Int {
-    if (array.size == 1) {
-        return array[0]
+fun solution(n: Int): IntArray {
+    val list = arrayListOf<Int>()
+    for (i in 1..n) {
+        if (i % 2 == 1) {
+            list.add(i)
+        }
     }
-
-    val hashmap = HashMap<Int, Int>()
-
-    array.forEach { i ->
-        hashmap[i] = hashmap.getOrDefault(i, 0) + 1
-    }
-
-    println(hashmap)
-
-    val values = hashmap.values
-    val i = values.maxOrNull() ?: -1
-    if (values.count { it == i } > 1) {
-        return -1
-    }
-
-    return hashmap.entries.find { it.value == i }?.key ?: -1
+    return list.toIntArray()
 }
