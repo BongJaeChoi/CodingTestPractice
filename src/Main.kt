@@ -1,58 +1,60 @@
+import java.util.*
+import kotlin.collections.HashMap
+
 fun main(args: Array<String>) {
-//    println(solution(5, intArrayOf(10, 6, 8, 4, 7, 5, 4, 4, 5, 3, 2, 1)))
-//    println(solution(arrayOf("muzi","forodo","apeach","neo"), arrayOf("frodo neo","muzi forodo"),2))
-    println(solution("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"))
+    val sc = Scanner(System.`in`)
+//    val input1 = sc.nextInt()
+//    val input2 = sc.nextInt()
+//    solution(input1, input2)
+    val a = arrayOf("classic", "pop", "classic", "classic", "pop")
+    val b = intArrayOf(500, 600, 150, 800, 2500)
+
+    println(solution(a, b).contentToString())
 }
 
-fun solution() {
+fun solution(input1: Int, input2: Int) {
+
 
 }
 
-fun solution(G: String): Int {
-    /**
-     * 1번 가위바위보 문제
-     * 이기면 2점 비기면 1점 지면 0점
-     */
+fun solution(genres: Array<String>, plays: IntArray): IntArray {
+    val orderMap = HashMap<String, Int>()
 
-    var rResult = 0
-    var sResult = 0
-    var pResult = 0
-
-    //묵만 낼 때
-    for (c in G) {
-        val score = when (c) {
-            'R' -> 1
-            'S' -> 2
-            'P' -> 0
-            else -> throw java.lang.IllegalArgumentException("잘못된 문자열")
-        }
-        rResult += score
+    genres.forEachIndexed { index, s ->
+        orderMap[s] = orderMap.getOrDefault(s, 0) + plays[index]
     }
 
-    //찌만 낼 때
-    for (c in G) {
-        val score = when (c) {
-            'R' -> 0
-            'S' -> 1
-            'P' -> 2
-            else -> throw java.lang.IllegalArgumentException("잘못된 문자열")
-        }
-        sResult += score
+    println("orderMap : ${orderMap}")
+
+    //장르별 높은 순서대로 플레이 카운트 정렬
+    val sortedGenres = orderMap.toList()
+        .sortedWith(compareBy { -it.second })
+        .toMap()
+
+    println("정렬됬나 :${sortedGenres}")
+
+
+    val countMap = HashMap<Int, String>()
+    plays.forEachIndexed { index, i ->
+        countMap[i] = genres[index]
     }
 
-    //빠만 낼 때
-    for (c in G) {
-        val score = when (c) {
-            'R' -> 2
-            'S' -> 0
-            'P' -> 1
-            else -> throw java.lang.IllegalArgumentException("잘못된 문자열")
+    //2개까지만 결과 입력
+    val answer = arrayListOf<Int>()
+
+    val message = countMap.toList().sortedByDescending { pair: Pair<Int, String> -> sortedGenres[pair.second] }.toMap()
+    println("message : ${message}")
+
+    var genre = sortedGenres.entries.first().key
+    var count = 0
+    println("plays 뭔데 :${plays.indexOf(800)}")
+    for ((index, element) in message.entries.withIndex()) {
+        plays.forEach {
+            if (element.value == message.get(it)) {
+            }
         }
-        pResult += score
+        answer.add(plays.indexOf(element.key))
     }
-
-    val intArr = intArrayOf(rResult, sResult, pResult)
-    intArr.sort()
-
-    return intArr.last()
+    return answer.toIntArray()
 }
+
